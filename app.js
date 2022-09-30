@@ -20,15 +20,16 @@ canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
+ctx.linejoin = "round";
 let isPainting = false;
 let isFilling = false;
 function onMove(event) {
   if (isPainting) {
-    ctx.lineTo(event.offsetX, event.offsetY);
+    ctx.lineTo(event.offsetX - 20, event.offsetY - 20);
     ctx.stroke();
     return;
   }
-  ctx.moveTo(event.offsetX, event.offsetY);
+  ctx.moveTo(event.offsetX - 20, event.offsetY - 20);
 }
 
 function startPainting() {
@@ -73,7 +74,7 @@ function onCanvasClick() {
 }
 
 function onDestroyClick() {
-  if(confirm("Are you sure to destroy your works?")) {
+  if(confirm("Are you sure to destroy your work?")) {
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }
@@ -117,15 +118,18 @@ function onSaveClick() {
 }
 
 function onRangeMove1() {
-  lineWidth.value = 0;
+  lineWidth.value = 1;
+  ctx.lineWidth = 1;
 }
 
 function onRangeMove2() {
   lineWidth.value = 5;
+  ctx.lineWidth = 5;
 }
 
 function onRangeMove3() {
   lineWidth.value = 10;
+  ctx.lineWidth = 10;
 }
 
 canvas.addEventListener("dblclick", onDoubleClick);
